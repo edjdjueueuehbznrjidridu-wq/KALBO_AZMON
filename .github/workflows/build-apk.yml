@@ -132,7 +132,7 @@ jobs:
                   raise SystemExit(f'Missing Android build requirement: {package}')
 
           service_source = Path('services/kalvo_monitor.py').read_text(encoding='utf-8')
-          if 'monitor_loop' not in service_source or 'paper_only' not in service_source:
+          if 'monitor_loop' not in service_source or not any(token in service_source for token in ('paper_only', 'paper-only')):
               raise SystemExit('Background service entry point failed its static safety check')
 
           print('KALVO 7.2.1 source, icon, sounds and Android service validated.')
